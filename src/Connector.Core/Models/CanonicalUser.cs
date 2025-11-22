@@ -1,4 +1,4 @@
-namespace Connector.Core.Models;
+namespace Connector.Core.Models { 
 
 
 public class CanonicalUser
@@ -9,4 +9,5 @@ public string Username { get; set; } = null!;
 public string GivenName { get; set; } = null!;
 public string FamilyName { get; set; } = null!;
 public string Email { get; set; } = null!;
+}
 }

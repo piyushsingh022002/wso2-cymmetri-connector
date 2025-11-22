@@ -1,5 +1,4 @@
 using System.Net.Http.Json;
-using Connector.Core.Models;
 
 
 public class Wso2Client
