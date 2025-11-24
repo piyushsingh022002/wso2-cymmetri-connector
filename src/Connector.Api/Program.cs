@@ -23,8 +23,14 @@ try
     // Add HttpClients with SSL bypass for dev
     builder.Services.AddHttpClient<Wso2Client>(c =>
     {
-        c.BaseAddress = new Uri("https://localhost:9443/");
-        var byteArray = Encoding.ASCII.GetBytes("admin:admin");
+        // Use config instead of localhost
+        c.BaseAddress = new Uri(wso2BaseUrl);
+        Console.WriteLine("WSO2 Base URL at startup: " + wso2BaseUrl);
+        var username = builder.Configuration["SCIM:Username"];
+        var password = builder.Configuration["SCIM:Password"];
+
+        //var byteArray = Encoding.ASCII.GetBytes("admin:admin");
+        var byteArray = Encoding.ASCII.GetBytes($"{username}:{password}");
         c.DefaultRequestHeaders.Authorization =
             new AuthenticationHeaderValue("Basic", Convert.ToBase64String(byteArray));
     })
