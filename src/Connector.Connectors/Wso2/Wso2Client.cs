@@ -21,7 +21,7 @@ public class Wso2Client
 
             var rawBody = await res.Content.ReadAsStringAsync();
             Console.WriteLine("WSO2 Response JSON:");
-            Console.WriteLine(rawBody);
+            //Console.WriteLine(rawBody);
 
             if (res.StatusCode == System.Net.HttpStatusCode.Unauthorized)
  {
