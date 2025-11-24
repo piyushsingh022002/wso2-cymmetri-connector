@@ -1,12 +1,12 @@
+using Connector.Core.Models;
+using Connector.Connectors.Wso2;
+using Connector.Connectors.Cymmetri;
+using Moq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Text.Json;
-using Connector.Connectors.Cymmetri;
-using Connector.Connectors.Wso2;
-using Connector.Core.Models;
 using FluentAssertions;
-using Moq;
 using RichardSzalay.MockHttp;
 using Xunit;
 
@@ -97,10 +97,10 @@ public class SyncConnectorTests
             new CanonicalUser { SourceId = "2", Username = "b", GivenName = "C", FamilyName = "D", Email = "c@d.com" }
         };
 
-        var wso2Mock = new Mock<Wso2Client>(MockBehavior.Strict, new HttpClient(new MockHttpMessageHandler()));
+        var wso2Mock = new Mock<Wso2Client>(MockBehavior.Strict, new HttpClient(new MockHttpMessageHandler()) { BaseAddress = new Uri("http://localhost") });
         wso2Mock.Setup(x => x.GetUsersAsync(It.IsAny<int>(), It.IsAny<int>())).ReturnsAsync(users.ToList());
 
-        var cymMock = new Mock<CymmetriClient>(MockBehavior.Strict, new HttpClient(new MockHttpMessageHandler()));
+        var cymMock = new Mock<CymmetriClient>(MockBehavior.Strict, new HttpClient(new MockHttpMessageHandler()) { BaseAddress = new Uri("http://localhost") });
         cymMock.Setup(x => x.CreateUserAsync(It.IsAny<CanonicalUser>()))
             .ReturnsAsync(new HttpResponseMessage(HttpStatusCode.Created));
 
@@ -111,7 +111,7 @@ public class SyncConnectorTests
         using var cts = new CancellationTokenSource();
         cts.CancelAfter(10); // Cancel quickly after start
 
-        await worker.ExecuteAsync(cts.Token);
+        await worker.RunExecuteAsync(cts.Token);
 
         // Assert
         cymMock.Verify(x => x.CreateUserAsync(It.IsAny<CanonicalUser>()), Times.Exactly(2));

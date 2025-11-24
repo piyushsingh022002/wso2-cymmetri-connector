@@ -1,0 +1,30 @@
+# .NET
+bin/
+obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Visual Studio
+.vs/
+
+# Build Results
+[Dd]ebug/
+[Rr]elease/
+
+# NuGet
+*.nupkg
+.nuget/
+
+# Others
+*.log
+*.tlog
+*.cache
+*.pdb
+*.dbmdl
+*.dbmdl
+*.db
+*.DS_Store
+*.vscode/
+TestResults/

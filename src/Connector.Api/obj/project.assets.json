@@ -743,6 +743,29 @@
         "build": {
           "buildTransitive/net8.0/System.Text.Json.targets": {}
         }
+      },
+      "Connector.Connectors/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "dependencies": {
+          "Connector.Core": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Connector.Connectors.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Connector.Connectors.dll": {}
+        }
+      },
+      "Connector.Core/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "compile": {
+          "bin/placeholder/Connector.Core.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Connector.Core.dll": {}
+        }
       }
     }
   },
@@ -1875,10 +1898,22 @@
         "system.text.json.nuspec",
         "useSharedDesignerContext.txt"
       ]
+    },
+    "Connector.Connectors/1.0.0": {
+      "type": "project",
+      "path": "../Connector.Connectors/Connector.Connectors.csproj",
+      "msbuildProject": "../Connector.Connectors/Connector.Connectors.csproj"
+    },
+    "Connector.Core/1.0.0": {
+      "type": "project",
+      "path": "../Connector.Core/Connector.Core.csproj",
+      "msbuildProject": "../Connector.Core/Connector.Core.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net9.0": [
+      "Connector.Connectors >= 1.0.0",
+      "Connector.Core >= 1.0.0",
       "Microsoft.AspNetCore.OpenApi >= 9.0.10",
       "Microsoft.Extensions.Hosting >= 10.0.0",
       "Microsoft.Extensions.Http >= 10.0.0"
@@ -1916,7 +1951,14 @@
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "D:\\wso2-cymmetri-connector\\src\\Connector.Connectors\\Connector.Connectors.csproj": {
+              "projectPath": "D:\\wso2-cymmetri-connector\\src\\Connector.Connectors\\Connector.Connectors.csproj"
+            },
+            "D:\\wso2-cymmetri-connector\\src\\Connector.Core\\Connector.Core.csproj": {
+              "projectPath": "D:\\wso2-cymmetri-connector\\src\\Connector.Core\\Connector.Core.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
